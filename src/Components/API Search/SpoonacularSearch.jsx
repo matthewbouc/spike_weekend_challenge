@@ -1,9 +1,11 @@
 import axios from "axios"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom";
 
 function SpoonacularSearch(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const recipeSearchList = useSelector(store => store.recipeSearchList)
 
     const [searchQuery, setSearchQuery] = useState('')
@@ -30,7 +32,8 @@ function SpoonacularSearch(){
             dispatch({
                 type: 'SET_RECIPE_DETAILS',
                 payload: response.data
-            })
+            });
+            history.push(`/recipe_details/${recipeId}`);
         }).catch(error => {
             console.log('error GETting recipe by id', error);
         });

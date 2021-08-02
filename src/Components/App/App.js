@@ -1,13 +1,21 @@
 import './App.css';
 import SpoonacularSearch from '../API Search/SpoonacularSearch';
+import { HashRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
+import RecipeDetails from '../RecipeDetails/RecipeDetails';
 
 function App() {
+  const history = useHistory();
   return (
     <div className="App">
-      <header className="App-header">
-      <p>Text Goes here</p>
+      <Router>
+      <p>Spoonacular Recipe API</p>
+      <Route exact path="/">
       <SpoonacularSearch />
-      </header>
+      </Route>
+      <Switch>
+        <Route path="/recipe_details/:id" exact children={<RecipeDetails />} />
+      </Switch>
+      </Router>
     </div>
   );
 }
